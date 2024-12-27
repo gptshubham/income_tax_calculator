@@ -9,8 +9,21 @@
   </head>
   <body>
     <div class="container">
+      <!-- heading -->
       <h1>Income Tax Calculator</h1>
-      <form action="">
+      <!-- tax regime selection -->
+      <div class="regime">
+        <div class="old-regime">
+          <label for="old" class="radio-label">Old Regime</label>
+          <input type="radio" id="old" name="regime" />
+        </div>
+        <div class="new-regime">
+          <label for="new" class="radio-label">New Regime</label>
+          <input type="radio" id="new" name="regime" />
+        </div>
+      </div>
+      <!-- user income input section -->
+      <div class="user-income">
         <label>Enter your Annual Income(INR):</label>
         <input
           type="number"
@@ -19,9 +32,52 @@
           min="1"
           placeholder="E.g; 700000"
         />
-        <button type="submit">calculate Tax</button>
-        <div class="tax-container"></div>
-      </form>
+      </div>
+      <!-- deductions u/s 80C input section -->
+      <div class="diductions">
+        <div class="section80C">
+          <label for="sec80C">Deductions under Section 80C (₹)</label>
+          <input
+            type="number"
+            id="sec80C"
+            name="sec80C"
+            placeholder="Max 150000"
+            min="0"
+            max="150000"
+          />
+        </div>
+      </div>
+      <div class="hra">
+        <label for="hra-amount">HRA (₹)</label>
+        <input
+          type="number"
+          id="hra-amount"
+          placeholder="Enter HRA amount"
+          min="0"
+        />
+      </div>
+      <!-- button section -->
+      <div class="button-container">
+        <button id="calculate">Calculate Tax</button>
+        <button id="reset">Reset</button>
+      </div>
+      <!-- computed tax and take home salary section -->
+      <div class="tax-container hidden"></div>
+      <div id="result" class="hidden">
+        <h3>Tax Breakdown</h3>
+        <div class="result-grid">
+          <span>Taxable Income:</span>
+          <span id="taxable-income"></span>
+          <span>Base Tax:</span>
+          <span id="base-tax"></span>
+          <span>Cess (4%):</span>
+          <span id="cess"></span>
+          <span class="total">Total Tax:</span>
+          <span id="total-tax" class="total"></span>
+          <span class="total">Monthly Take-home:</span>
+          <span id="monthly-salary" class="total"></span>
+        </div>
+      </div>
     </div>
   </body>
 </html>
