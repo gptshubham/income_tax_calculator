@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Income Tax Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Income Tax Calculator</h1>
+      <form action="">
+        <label>Enter your Annual Income(INR):</label>
+        <input
+          type="number"
+          id="income"
+          name="income"
+          min="1"
+          placeholder="E.g; 700000"
+        />
+        <button type="submit">calculate Tax</button>
+        <div class="tax-container"></div>
+      </form>
+    </div>
+  </body>
+</html>
