@@ -1,33 +1,34 @@
-const form = document.querySelector('form');
-
+const container = document.querySelector('.container');
 const taxContainer = document.querySelector('.tax-container');
+const newRegime = document.querySelector('.new-regime');
 
-let tax;
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
+const incomeElement = document.querySelector('#income');
+const result = document.querySelector('#result');
+// console.log(result.className);
 
-  const data = new FormData(form);
+const calculate_button = document.querySelector('#calculate');
+// console.log(calculate_button);
 
-  const [id, income] = data.entries();
-  // console.log(data.entries());
-  // console.log([id, income]);
-  // console.log(id[1]);
+// selecting result related elements
 
-  let tax;
-  if (id[1] == '') {
-    tax = 0;
-  } else {
-    tax = calculateTax(Number(id[1]));
-  }
+const taxableIncomeElement = document.querySelector('#taxable-income');
+// console.log(taxableIncomeElement);
+const baseTaxElement = document.querySelector('#base-tax');
+const surchargeElement = document.querySelector('#surcharge');
+const cessElement = document.querySelector('#cess');
+const totalTaxElement = document.querySelector('#total-tax');
+const monthlySalaryElement = document.querySelector('#monthly-salary');
 
-  // console.log(tax);
-
-  taxContainer.innerHTML = `Maximum Tax Payable: ${tax}
-  <br>(The Income Tax Act,1961)`;
+calculate_button.addEventListener('click', () => {
+  newRegimeTaxation();
+  result.classList.remove('hidden');
 });
 
-// function to calculate income tax based on different tax brackets
-const calculateTax = (income) => {
+// function to calculate income tax based on different tax brackets of New Regime
+const newRegimeTaxation = () => {
+  const incomeElement = document.querySelector('#income');
+  // console.log(incomeElement.value);
+  const income = Number(incomeElement.value);
   // console.log(income);
   let tax;
 
@@ -63,24 +64,32 @@ const calculateTax = (income) => {
   }
 
   // calculation of surcharge if income > 50 lakhs
-  let surcharge = 0;
-
-  if (income > 5000000 && income < 5500000) {
-    surcharge = income - 5000000;
-  } else if (income >= 5500000 && income < 10000000) {
-    surcharge = (tax * 10) / 100;
-  } else if (income >= 10000000 && income <= 11500000) {
-    surcharge = income - 10000000;
-  } else if (income > 11500000) {
-    surcharge = (tax * 15) / 100;
-  }
+  const surcharge = surchargeCalculation(income, tax);
 
   let tax_before_cess = tax + surcharge;
 
   // calculation of cess
   const cess = (tax_before_cess * 4) / 100;
 
-  const taxPayable = tax_before_cess + cess;
+  const totalTax = tax_before_cess + cess;
 
-  return taxPayable;
+  const monthlySalary = Math.round((income - totalTax) / 12);
+
+  taxableIncomeElement.innerHTML = income;
+  baseTaxElement.innerHTML = tax;
+  surchargeElement.innerHTML = surcharge;
+  cessElement.innerHTML = cess;
+  totalTaxElement.innerHTML = totalTax;
+  monthlySalaryElement.innerHTML = monthlySalary;
+};
+
+const surchargeCalculation = (inc, tax) => {
+  let surcharge = 0;
+  if (inc > 5000000) {
+    surcharge = (tax * 10) / 100;
+  } else if (inc > 10000000) {
+    surcharge = (tax * 15) / 100;
+  }
+
+  return surcharge;
 };

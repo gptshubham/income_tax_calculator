@@ -40,6 +40,8 @@ h1 {
 .new-regime {
   padding-right: 20px;
   background-color: #f0eded;
+  padding: 5px;
+  border-radius: 5px;
 }
 .radio-label {
   display: inline;
