@@ -137,3 +137,8 @@ button {
     flex-direction: column;
   }
 }
+
+img {
+  height: 1rem;
+  vertical-align: top;
+}
